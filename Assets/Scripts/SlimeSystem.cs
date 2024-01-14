@@ -21,7 +21,7 @@ namespace KID
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
-        {
+        {if (index == 7) return;
             if (collision.gameObject.name == gameObject.name)
             {
                 //物件坐标
