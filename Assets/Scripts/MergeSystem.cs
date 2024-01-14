@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Fungus;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace KID
@@ -8,15 +9,25 @@ namespace KID
     {
         [Header("AllprefabSlime")]
         public GameObject[] prefabSlimes;
+
         public static MergeSystem instance;
+
+        private bool canMerge = true;
+
         private void Awake()
         {
             instance = this;
         }
-        public void Merge(int _index)
+        
+        public void Merge(int _index,Vector2 _point)
         {
-            print("<color=#99f>Merge</color>");
-            Instantiate(prefabSlimes[_index], Vector3.zero, Quaternion.identity);
+            if (canMerge)
+            {
+                canMerge = false;
+                print("<color=#99f>Merge</color>");
+                Instantiate(prefabSlimes[_index], _point, Quaternion.identity);
+            } 
+            
         }
 
     }
