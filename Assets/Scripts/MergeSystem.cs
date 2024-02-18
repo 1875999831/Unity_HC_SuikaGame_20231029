@@ -1,7 +1,4 @@
-﻿using Fungus;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿
 using UnityEngine;
 namespace KID
 {
@@ -10,6 +7,8 @@ namespace KID
     {
         [Header("AllprefabSlime")]
         public GameObject[] prefabSlimes;
+        [SerializeField, Header("合成音效")]
+        private AudioClip soundMerge;
 
         public static MergeSystem instance;
 
@@ -39,6 +38,8 @@ namespace KID
                 Invoke("CanMerge", 0.01f);
 
                 ScoreManager.instance.ADDScore(_index);
+
+                SoundManager.instance.PlaySound(soundMerge);
             }
            
 

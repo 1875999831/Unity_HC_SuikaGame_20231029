@@ -5,6 +5,7 @@ namespace KID
     /// <summary>
     /// 生成系統：隨機生成第一顆與下一顆物件
     /// </summary>
+    [DefaultExecutionOrder(100)]
     public class SpawnSystem : MonoBehaviour
     {
         /* 練習儲存遊戲物件
@@ -42,6 +43,7 @@ namespace KID
         [Header("所有史萊姆預製物")]
         public GameObject[] prefabSlimes;
 
+
         public GameObject currentSlime;
         public GameObject nextSlime;
 
@@ -58,6 +60,9 @@ namespace KID
         /// 是否能夠放下史萊姆
         /// </summary>
         public bool canReleaseSlime = true;
+
+        [SerializeField, Header("放东西音效")]
+        private AudioClip soundDrop;
 
         private void Awake()
         {
@@ -114,6 +119,8 @@ namespace KID
                 currentSlime.transform.SetParent(null);
                 // 對調目前與下一隻
                 SwitchCurrentAndNext();
+                //播放音效
+                SoundManager.instance.PlaySound(soundDrop);
             }
         }
 

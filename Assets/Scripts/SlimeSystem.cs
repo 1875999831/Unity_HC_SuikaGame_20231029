@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 
@@ -21,7 +20,10 @@ namespace KID
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
-        {if (index == 7) return;
+        {
+            //给史莱姆贴标签
+            tag = "Droped";
+            if (index == 7) return;
             if (collision.gameObject.name == gameObject.name)
             {
                 //物件坐标

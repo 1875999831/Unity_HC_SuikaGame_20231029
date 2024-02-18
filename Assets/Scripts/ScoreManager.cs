@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using TMPro;
 using UnityEngine;
 namespace KID
@@ -13,7 +12,8 @@ namespace KID
         
         [Header("TotalScore")]
         public int[] slimesScore = { 10, 20, 30, 40, 50, 60, 70, 80 };
-
+        [SerializeField, Header("最佳分数")]
+        private TextMeshProUGUI textHighScore;
         private int totalScore;
         //单例
         public static ScoreManager instance;
@@ -23,6 +23,8 @@ namespace KID
         private void Awake()
         {
             instance = this;
+            //最高分数转为字串贴在最佳分数界面上
+            textHighScore.text = PlayerPrefs.GetInt("最高分数").ToString();
         }
 
     
@@ -37,6 +39,14 @@ namespace KID
             textScore.text = totalScore.ToString();
 
             ChangeMaxSlimeIndex();
+
+            HighScore();
+        }
+
+        private void HighScore()
+        {
+            int highScore = PlayerPrefs.GetInt("最高分数");
+            if (totalScore > highScore) PlayerPrefs.SetInt("最高分数", totalScore);
         }
         /// <summary>
         /// 分数决定如何生成
